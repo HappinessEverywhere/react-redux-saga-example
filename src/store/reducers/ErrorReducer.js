@@ -26,7 +26,7 @@ const ErrorReducer = (state = initialState, action) => {
       })
     case PRODUCTS_FETCH_FAIL:
       return produce(state, (draftState) => {
-        draftState.productsError = action.error
+        draftState.productsError = action.payload.error
       })
     case CART_LOADING:
     case CART_FETCH:

@@ -124,10 +124,16 @@ const cartItems = [
 export const getProducts = async () => {
   await wait()
   return { success: true, products }
+  // throw {
+  //   error: "Some problems in fetching the products. Please try again later.",
+  // }
 }
 export const getCartItems = async () => {
   await wait()
-  return { success: true, cartItems }
+  // return { success: true, cartItems }
+  throw {
+    error: "Some problems in fetching the products. Please try again later.",
+  }
 }
 
 export const addCartItem = async () => {
