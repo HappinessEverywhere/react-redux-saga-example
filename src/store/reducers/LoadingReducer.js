@@ -32,6 +32,8 @@ const LoadingReducer = (state = initialState, action) => {
       return produce(state, (draftState) => {
         draftState.productsLoading = false
       })
+
+    case CART_FETCH:
     case CART_LOADING:
       return produce(state, (draftState) => {
         draftState.cartLoading = true

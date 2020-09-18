@@ -130,18 +130,25 @@ export const getProducts = async () => {
 }
 export const getCartItems = async () => {
   await wait()
-  // return { success: true, cartItems }
-  throw {
-    error: "Some problems in fetching the products. Please try again later.",
-  }
+  return { success: true, cartItems }
+  // throw {
+  //   error: "Some problems in fetching the cart items. Please try again later.",
+  // }
 }
 
 export const addCartItem = async () => {
   await wait()
   return { success: true }
+  // throw {
+  //   error: "Some problems in adding items to the cart. Please try again later.",
+  // }
 }
 
 export const removeCartItem = async () => {
   await wait()
   return { success: true }
+  // throw {
+  //   error:
+  //     "Some problems in removing items from the cart. Please try again later.",
+  // }
 }

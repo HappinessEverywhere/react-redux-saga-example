@@ -15,11 +15,13 @@ import { getCartItems, addCartItem, removeCartItem } from "../../api"
 
 function* handleCartFetch() {
   try {
-    const cart = yield call(getCartItems)
+    yield put({ type: CART_LOADING })
+    const response = yield call(getCartItems)
 
-    yield put({ type: CART_FETCH_SUCCESS, payload: cart })
+    yield put({ type: CART_FETCH_SUCCESS, payload: response.cartItems })
   } catch (err) {
-    yield put({ type: CART_FETCH_FAIL })
+    console.log(err)
+    yield put({ type: CART_FETCH_FAIL, payload: err })
   }
 }
 

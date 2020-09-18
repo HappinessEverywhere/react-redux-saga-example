@@ -9,6 +9,10 @@ import {
   CART_FETCH,
   CART_FETCH_SUCCESS,
   CART_FETCH_FAIL,
+  ADD_CART_SUCCESS,
+  REMOVE_CART_SUCCESS,
+  ADD_CART_FAIL,
+  REMOVE_CART_FAIL,
 } from "../constants"
 
 const initialState = {
@@ -31,12 +35,16 @@ const ErrorReducer = (state = initialState, action) => {
     case CART_LOADING:
     case CART_FETCH:
     case CART_FETCH_SUCCESS:
+    case ADD_CART_SUCCESS:
+    case REMOVE_CART_SUCCESS:
       return produce(state, (draftState) => {
         draftState.cartError = null
       })
+    case ADD_CART_FAIL:
+    case REMOVE_CART_FAIL:
     case CART_FETCH_FAIL:
       return produce(state, (draftState) => {
-        draftState.cartError = action.error
+        draftState.cartError = action.payload.error
       })
 
     default:

@@ -1,15 +1,20 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { connect } from "react-redux"
 import Grid from "@material-ui/core/Grid"
 import Typography from "@material-ui/core/Typography"
 import CartCard from "./CartCard"
 import PayButton from "./PayButton"
 import Loader from "./Loader"
+import Alert from "./Alert"
 
-function Cart({ cartItems = [], cartLoading }) {
+function Cart({ cartItems = [], cartLoading, fetchCart, cartError }) {
+  useEffect(() => {
+    fetchCart()
+  }, [])
   return (
     <Grid container>
       {cartLoading && <Loader />}
+      {cartError && <Alert errorMessage={cartError} />}
       <Typography
         align="center"
         gutterBottom
@@ -29,9 +34,18 @@ function Cart({ cartItems = [], cartLoading }) {
   )
 }
 
-const mapStateToProps = ({ cart, isLoading: { cartLoading } }) => ({
+const mapStateToProps = ({
+  cart,
+  isLoading: { cartLoading },
+  error: { cartError },
+}) => ({
   cartItems: cart,
   cartLoading,
+  cartError,
 })
 
-export default connect(mapStateToProps)(Cart)
+const mapDispatchToProps = (dispatch) => ({
+  fetchCart: () => dispatch({ type: "CART_FETCH" }),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
