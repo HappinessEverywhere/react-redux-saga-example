@@ -16,8 +16,10 @@ const useStyles = makeStyles({
   },
 })
 
-function ProductCard({ product, addCartItem }) {
+function ProductCard({ product, cartItems, addCartItem }) {
   const classes = useStyles()
+
+  const inCart = cartItems.findIndex((item) => item.id === product.id) >= 0
 
   return (
     <Card className={classes.root}>
@@ -36,16 +38,21 @@ function ProductCard({ product, addCartItem }) {
           size="small"
           color="primary"
           onClick={() => addCartItem(product)}
+          disabled={inCart}
         >
-          Add to cart
+          {inCart ? "In Cart" : "Add to cart"}
         </Button>
       </CardActions>
     </Card>
   )
 }
 
+const mapStateToProps = ({ cart }) => ({
+  cartItems: cart,
+})
+
 const mapDispatchToProps = (dispatch, ownProps) => ({
   addCartItem: (cartItem) => dispatch({ type: "ADD_CART", payload: cartItem }),
 })
 
-export default connect(null, mapDispatchToProps)(ProductCard)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)
