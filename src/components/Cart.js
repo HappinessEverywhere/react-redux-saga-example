@@ -18,12 +18,8 @@ function Cart({ cartItems = [] }) {
       </Typography>
 
       {cartItems.map((cartItem) => (
-        <Grid item xs={12}>
-          <CartCard
-            title={cartItem.title}
-            price={cartItem.price}
-            key={cartItem.id}
-          />
+        <Grid item xs={12} key={cartItem.id}>
+          <CartCard cartItem={cartItem} />
         </Grid>
       ))}
       <PayButton amountToPay={0} />

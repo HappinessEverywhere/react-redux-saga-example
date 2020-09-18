@@ -12,12 +12,13 @@ const CartReducer = (state = [], action) => {
       return action.payload
     case ADD_CART_SUCCESS:
       return produce(state, (draftState) => {
-        console.log("Payload: ", action.payload)
+        console.log("Payload: Add cart success", action.payload)
         draftState.push(action.payload)
       })
     case REMOVE_CART_SUCCESS:
       return produce(state, (draftState) => {
-        draftState = draftState.filter((item) => item !== action.payload)
+        console.log(state, draftState, action)
+        return draftState.filter((item) => item.id !== action.payload)
       })
     default:
       return state
