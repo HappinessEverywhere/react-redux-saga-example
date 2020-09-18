@@ -9,6 +9,7 @@ import Loader from "./Loader"
 function Cart({ cartItems = [], cartLoading }) {
   return (
     <Grid container>
+      {cartLoading && <Loader />}
       <Typography
         align="center"
         gutterBottom
@@ -17,8 +18,6 @@ function Cart({ cartItems = [], cartLoading }) {
       >
         CART
       </Typography>
-
-      {cartLoading && <Loader />}
 
       {cartItems.map((cartItem) => (
         <Grid item xs={12} key={cartItem.id}>
