@@ -9,6 +9,10 @@ import {
   CART_FETCH,
   CART_FETCH_SUCCESS,
   CART_FETCH_FAIL,
+  ADD_CART_SUCCESS,
+  ADD_CART_FAIL,
+  REMOVE_CART_SUCCESS,
+  REMOVE_CART_FAIL,
 } from "../constants"
 
 const initialState = {
@@ -35,6 +39,10 @@ const LoadingReducer = (state = initialState, action) => {
     case CART_FETCH:
     case CART_FETCH_SUCCESS:
     case CART_FETCH_FAIL:
+    case ADD_CART_SUCCESS:
+    case ADD_CART_FAIL:
+    case REMOVE_CART_SUCCESS:
+    case REMOVE_CART_FAIL:
       return produce(state, (draftState) => {
         draftState.cartLoading = false
       })

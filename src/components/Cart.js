@@ -4,8 +4,9 @@ import Grid from "@material-ui/core/Grid"
 import Typography from "@material-ui/core/Typography"
 import CartCard from "./CartCard"
 import PayButton from "./PayButton"
+import Loader from "./Loader"
 
-function Cart({ cartItems = [] }) {
+function Cart({ cartItems = [], cartLoading }) {
   return (
     <Grid container>
       <Typography
@@ -17,6 +18,8 @@ function Cart({ cartItems = [] }) {
         CART
       </Typography>
 
+      {cartLoading && <Loader />}
+
       {cartItems.map((cartItem) => (
         <Grid item xs={12} key={cartItem.id}>
           <CartCard cartItem={cartItem} />
@@ -27,8 +30,9 @@ function Cart({ cartItems = [] }) {
   )
 }
 
-const mapStateToProps = ({ cart }) => ({
+const mapStateToProps = ({ cart, isLoading: { cartLoading } }) => ({
   cartItems: cart,
+  cartLoading,
 })
 
 export default connect(mapStateToProps)(Cart)
