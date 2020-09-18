@@ -1,4 +1,5 @@
 import React from "react"
+import { connect } from "react-redux"
 import Grid from "@material-ui/core/Grid"
 import Typography from "@material-ui/core/Typography"
 import CartCard from "./CartCard"
@@ -30,4 +31,8 @@ function Cart({ cartItems = [] }) {
   )
 }
 
-export default Cart
+const mapStateToProps = ({ cart }) => ({
+  cartItems: cart,
+})
+
+export default connect(mapStateToProps)(Cart)

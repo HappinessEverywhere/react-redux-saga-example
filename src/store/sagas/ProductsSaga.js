@@ -11,7 +11,6 @@ function* handleProductsFetch() {
     // We can use select to select a part of state. If yield select is called without paranthesis, the effect will be resolved with the whole state
     // const page = yield select((state) => state.nextPage)
     const response = yield call(getProducts)
-    console.log("PRODUCTS_FETCH", response.products)
 
     yield put({ type: PRODUCTS_FETCH_SUCCESS, payload: response.products })
   } catch (err) {

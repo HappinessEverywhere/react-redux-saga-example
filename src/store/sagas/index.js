@@ -4,5 +4,4 @@ import CartSaga from "./CartSaga"
 
 export default function* rootSaga() {
   yield all([ProductsSaga(), CartSaga()])
-  // code after all-effect
 }

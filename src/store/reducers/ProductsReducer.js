@@ -9,7 +9,6 @@ import {
 const ProductsReducer = (state = [], action) => {
   switch (action.type) {
     case PRODUCTS_FETCH_SUCCESS:
-      console.log(action, "From products reducer")
       return action.payload
 
     default:
