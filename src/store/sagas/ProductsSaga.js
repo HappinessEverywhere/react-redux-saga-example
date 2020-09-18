@@ -16,7 +16,6 @@ function* handleProductsFetch() {
 
     yield put({ type: PRODUCTS_FETCH_SUCCESS, payload: response.products })
   } catch (err) {
-    console.log("Error: ", JSON.stringify(err))
     yield put({ type: PRODUCTS_FETCH_FAIL, payload: err })
   }
 }
