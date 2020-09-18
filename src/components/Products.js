@@ -1,8 +1,12 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { connect } from "react-redux"
 import Grid from "@material-ui/core/Grid"
 import ProductCard from "./ProductCard"
 
-function Products({ products = [] }) {
+function Products({ products = [], fetchProducts }) {
+  useEffect(() => {
+    fetchProducts()
+  }, [])
   return (
     <Grid container>
       {products.map((product) => (
@@ -14,4 +18,13 @@ function Products({ products = [] }) {
   )
 }
 
-export default Products
+const mapStateToProps = ({ isLoading, products, error }) => ({
+  isLoading,
+  products,
+  error,
+})
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  fetchProducts: () => dispatch({ type: "PRODUCTS_FETCH" }),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products)

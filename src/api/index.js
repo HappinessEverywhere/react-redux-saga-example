@@ -1,3 +1,5 @@
+import { wait } from "../util"
+
 const products = [
   {
     id: 1,
@@ -106,6 +108,34 @@ const products = [
   },
 ]
 
-export const getProducts = () => {
-  return products
+const cartItems = [
+  {
+    id: 2,
+    title: "Bread",
+    price: 250,
+  },
+  {
+    id: 3,
+    title: "Salad Dressings",
+    price: 780,
+  },
+]
+
+export const getProducts = async () => {
+  await wait()
+  return { success: true, products }
+}
+export const getCartItems = async () => {
+  await wait()
+  return { success: true, cartItems }
+}
+
+export const addCartItem = async () => {
+  await wait()
+  return { success: true }
+}
+
+export const removeCartItem = async () => {
+  await wait()
+  return { success: true }
 }
