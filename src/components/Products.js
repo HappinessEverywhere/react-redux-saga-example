@@ -1,16 +1,22 @@
 import React, { useEffect } from "react"
-import { connect } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import Grid from "@material-ui/core/Grid"
 import ProductCard from "./ProductCard"
 import Loader from "./Loader"
 import Alert from "./Alert"
 
-function Products({
-  products = [],
-  productsLoading,
-  productsError,
-  fetchProducts,
-}) {
+function Products() {
+  const { productsLoading, products, productsError } = useSelector((state) => ({
+    productsLoading: state.isLoading.productsLoading,
+    products: state.products,
+    productsError: state.error.productsError,
+  }))
+
+  const dispatch = useDispatch()
+  const { fetchProducts } = {
+    fetchProducts: () => dispatch({ type: "PRODUCTS_FETCH" }),
+  }
+
   useEffect(() => {
     fetchProducts()
   }, [])
@@ -27,17 +33,4 @@ function Products({
   )
 }
 
-const mapStateToProps = ({
-  isLoading: { productsLoading },
-  products,
-  error: { productsError },
-}) => ({
-  productsLoading,
-  products,
-  productsError,
-})
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  fetchProducts: () => dispatch({ type: "PRODUCTS_FETCH" }),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Products)
+export default Products

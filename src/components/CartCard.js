@@ -1,12 +1,27 @@
 import React from "react"
-import { connect } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import Grid from "@material-ui/core/Grid"
 import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography"
 
 import { centsToDollar } from "../util"
 
-function CartCard({ cartItem, removeCartItem }) {
+function CartCard({ cartItem }) {
+  // Selectors
+  const { loadingCartItemId } = useSelector((state) => ({
+    loadingCartItemId: state.cart.loadingCartItemId,
+  }))
+  // Dispatch
+  const dispatch = useDispatch()
+  const { removeCartItem } = {
+    removeCartItem: (cartItem) =>
+      dispatch({ type: "REMOVE_CART", payload: cartItem }),
+  }
+
+  const isItemLoading = loadingCartItemId === cartItem.id
+
+  let buttonText = isItemLoading ? "..." : "Remove"
+
   return (
     <Grid
       container
@@ -33,16 +48,11 @@ function CartCard({ cartItem, removeCartItem }) {
           color="primary"
           onClick={() => removeCartItem(cartItem)}
         >
-          Remove
+          {buttonText}
         </Button>
       </Grid>
     </Grid>
   )
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  removeCartItem: (cartItem) =>
-    dispatch({ type: "REMOVE_CART", payload: cartItem }),
-})
-
-export default connect(null, mapDispatchToProps)(CartCard)
+export default CartCard

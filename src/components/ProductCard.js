@@ -1,5 +1,5 @@
 import React from "react"
-import { connect } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { makeStyles } from "@material-ui/core/styles"
 import Card from "@material-ui/core/Card"
 import CardActions from "@material-ui/core/CardActions"
@@ -16,18 +16,25 @@ const useStyles = makeStyles({
   },
 })
 
-function ProductCard({ product, cartItems, loadingCartItemId, addCartItem }) {
+function ProductCard({ product }) {
   const classes = useStyles()
+
+  const { cartItems, loadingCartItemId } = useSelector(({ cart }) => ({
+    cartItems: cart.cartItems,
+    loadingCartItemId: cart.loadingCartItemId,
+  }))
+
+  const dispatch = useDispatch()
+  const { addCartItem } = {
+    addCartItem: (cartItem) =>
+      dispatch({ type: "ADD_CART", payload: cartItem }),
+  }
 
   const inCart = cartItems.findIndex((item) => item.id === product.id) >= 0
 
   const isItemLoading = loadingCartItemId === product.id
 
-  let buttonText = isItemLoading
-    ? "Loading"
-    : inCart
-    ? "In Cart"
-    : "Add to cart"
+  let buttonText = isItemLoading ? "..." : inCart ? "In Cart" : "Add to cart"
 
   return (
     <Card className={classes.root}>
@@ -55,13 +62,4 @@ function ProductCard({ product, cartItems, loadingCartItemId, addCartItem }) {
   )
 }
 
-const mapStateToProps = ({ cart }) => ({
-  cartItems: cart.cartItems,
-  loadingCartItemId: cart.loadingCartItemId,
-})
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  addCartItem: (cartItem) => dispatch({ type: "ADD_CART", payload: cartItem }),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)
+export default ProductCard

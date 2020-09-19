@@ -1,5 +1,5 @@
 import React from "react"
-import { connect } from "react-redux"
+import { useSelector } from "react-redux"
 import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
 import IconButton from "@material-ui/core/IconButton"
@@ -8,7 +8,11 @@ import Badge from "@material-ui/core/Badge"
 import AccountCircle from "@material-ui/icons/AccountCircle"
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 
-function PrimaryAppBar({ cartItems }) {
+function PrimaryAppBar() {
+  const { cartItems } = useSelector(({ cart }) => ({
+    cartItems: cart,
+  }))
+
   return (
     <>
       <AppBar position="sticky" color="inherit">
@@ -34,8 +38,4 @@ function PrimaryAppBar({ cartItems }) {
   )
 }
 
-const mapStateToProps = ({ cart }) => ({
-  cartItems: cart,
-})
-
-export default connect(mapStateToProps)(PrimaryAppBar)
+export default PrimaryAppBar
