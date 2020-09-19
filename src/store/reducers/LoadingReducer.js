@@ -20,24 +20,20 @@ const initialState = {
   cartLoading: false,
 }
 
-const LoadingReducer = (state = initialState, action) => {
+const LoadingReducer = produce((draft, action) => {
   switch (action.type) {
     case PRODUCTS_LOADING:
-      return produce(state, (draftState) => {
-        draftState.productsLoading = true
-      })
+      draft.productsLoading = true
+      break
     case PRODUCTS_FETCH:
     case PRODUCTS_FETCH_SUCCESS:
     case PRODUCTS_FETCH_FAIL:
-      return produce(state, (draftState) => {
-        draftState.productsLoading = false
-      })
-
+      draft.productsLoading = false
+      break
     case CART_FETCH:
     case CART_LOADING:
-      return produce(state, (draftState) => {
-        draftState.cartLoading = true
-      })
+      draft.cartLoading = true
+      break
     case CART_FETCH:
     case CART_FETCH_SUCCESS:
     case CART_FETCH_FAIL:
@@ -45,12 +41,9 @@ const LoadingReducer = (state = initialState, action) => {
     case ADD_CART_FAIL:
     case REMOVE_CART_SUCCESS:
     case REMOVE_CART_FAIL:
-      return produce(state, (draftState) => {
-        draftState.cartLoading = false
-      })
-    default:
-      return state
+      draft.cartLoading = false
+      break
   }
-}
+}, initialState)
 
 export default LoadingReducer

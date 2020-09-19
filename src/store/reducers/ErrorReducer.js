@@ -20,36 +20,63 @@ const initialState = {
   cartError: null,
 }
 
-const ErrorReducer = (state = initialState, action) => {
+// Immer becomes very helpful while dealing with nested objects.
+
+const ErrorReducer = produce((draft, action) => {
   switch (action.type) {
     case PRODUCTS_LOADING:
     case PRODUCTS_FETCH:
     case PRODUCTS_FETCH_SUCCESS:
-      return produce(state, (draftState) => {
-        draftState.productsError = null
-      })
+      draft.productsError = null
+      break
     case PRODUCTS_FETCH_FAIL:
-      return produce(state, (draftState) => {
-        draftState.productsError = action.payload.error
-      })
+      draft.productsError = action.payload.error
+      break
     case CART_LOADING:
     case CART_FETCH:
     case CART_FETCH_SUCCESS:
     case ADD_CART_SUCCESS:
     case REMOVE_CART_SUCCESS:
-      return produce(state, (draftState) => {
-        draftState.cartError = null
-      })
+      draft.cartError = null
+      break
     case ADD_CART_FAIL:
     case REMOVE_CART_FAIL:
     case CART_FETCH_FAIL:
-      return produce(state, (draftState) => {
-        draftState.cartError = action.payload.error
-      })
-
-    default:
-      return state
+      draft.cartError = action.payload.error
+      break
   }
-}
+}, initialState)
+
+// const ErrorReducer = (state = initialState, action) => {
+//   switch (action.type) {
+//     case PRODUCTS_LOADING:
+//     case PRODUCTS_FETCH:
+//     case PRODUCTS_FETCH_SUCCESS:
+//       return produce(state, (draftState) => {
+//         draftState.productsError = null
+//       })
+//     case PRODUCTS_FETCH_FAIL:
+//       return produce(state, (draftState) => {
+//         draftState.productsError = action.payload.error
+//       })
+//     case CART_LOADING:
+//     case CART_FETCH:
+//     case CART_FETCH_SUCCESS:
+//     case ADD_CART_SUCCESS:
+//     case REMOVE_CART_SUCCESS:
+//       return produce(state, (draftState) => {
+//         draftState.cartError = null
+//       })
+//     case ADD_CART_FAIL:
+//     case REMOVE_CART_FAIL:
+//     case CART_FETCH_FAIL:
+//       return produce(state, (draftState) => {
+//         draftState.cartError = action.payload.error
+//       })
+
+//     default:
+//       return state
+//   }
+// }
 
 export default ErrorReducer

@@ -9,8 +9,7 @@ import {
 const CartReducer = produce((draft, action) => {
   switch (action.type) {
     case CART_FETCH_SUCCESS:
-      draft = action.payload
-      break
+      return action.payload
     case ADD_CART_SUCCESS:
       draft.push(action.payload)
       break

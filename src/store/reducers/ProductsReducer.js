@@ -6,14 +6,11 @@ import {
   REMOVE_PRODUCTS_SUCCESS,
 } from "../constants"
 
-const ProductsReducer = (state = [], action) => {
+const ProductsReducer = produce((draft, action) => {
   switch (action.type) {
     case PRODUCTS_FETCH_SUCCESS:
       return action.payload
-
-    default:
-      return state
   }
-}
+}, [])
 
 export default ProductsReducer
