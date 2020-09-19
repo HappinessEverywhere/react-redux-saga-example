@@ -10,7 +10,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 
 function PrimaryAppBar() {
   const { cartItems } = useSelector(({ cart }) => ({
-    cartItems: cart,
+    cartItems: cart.cartItems,
   }))
 
   return (
