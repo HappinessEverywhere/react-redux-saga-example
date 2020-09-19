@@ -6,21 +6,17 @@ import {
   REMOVE_CART_SUCCESS,
 } from "../constants"
 
-const CartReducer = (state = [], action) => {
+const CartReducer = produce((draft, action) => {
   switch (action.type) {
     case CART_FETCH_SUCCESS:
-      return action.payload
+      draft = action.payload
+      break
     case ADD_CART_SUCCESS:
-      return produce(state, (draftState) => {
-        draftState.push(action.payload)
-      })
+      draft.push(action.payload)
+      break
     case REMOVE_CART_SUCCESS:
-      return produce(state, (draftState) => {
-        return draftState.filter((item) => item.id !== action.payload)
-      })
-    default:
-      return state
+      return draft.filter((item) => item.id !== action.payload)
   }
-}
+}, [])
 
 export default CartReducer
