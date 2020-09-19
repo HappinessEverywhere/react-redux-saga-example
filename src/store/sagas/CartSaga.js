@@ -9,13 +9,11 @@ import {
   REMOVE_CART,
   REMOVE_CART_SUCCESS,
   REMOVE_CART_FAIL,
-  CART_LOADING,
 } from "../constants"
 import { getCartItems, addCartItem, removeCartItem } from "../../api"
 
 function* handleCartFetch() {
   try {
-    yield put({ type: CART_LOADING })
     const response = yield call(getCartItems)
 
     yield put({ type: CART_FETCH_SUCCESS, payload: response.cartItems })
@@ -27,7 +25,6 @@ function* handleCartFetch() {
 
 function* handleAddCart({ payload }) {
   try {
-    yield put({ type: CART_LOADING })
     const response = yield call(addCartItem, payload)
     yield put({ type: ADD_CART_SUCCESS, payload })
   } catch (error) {
@@ -36,7 +33,6 @@ function* handleAddCart({ payload }) {
 }
 function* handleRemoveCart({ payload }) {
   try {
-    yield put({ type: CART_LOADING })
     const response = yield call(removeCartItem, payload)
     yield put({ type: REMOVE_CART_SUCCESS, payload })
   } catch (error) {
