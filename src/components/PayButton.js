@@ -6,7 +6,7 @@ import { centsToDollar } from "../util"
 
 function PayButton() {
   const { cartItems } = useSelector((state) => ({
-    cartItems: state.cart,
+    cartItems: state.cart.cartItems,
   }))
 
   const amountToPay = cartItems.reduce((total, item) => total + item.price, 0)

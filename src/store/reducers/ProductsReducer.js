@@ -1,10 +1,6 @@
 import produce from "immer"
 
-import {
-  PRODUCTS_FETCH_SUCCESS,
-  ADD_PRODUCTS_SUCCESS,
-  REMOVE_PRODUCTS_SUCCESS,
-} from "../constants"
+import { PRODUCTS_FETCH_SUCCESS } from "../constants"
 
 const ProductsReducer = produce((draft, action) => {
   switch (action.type) {

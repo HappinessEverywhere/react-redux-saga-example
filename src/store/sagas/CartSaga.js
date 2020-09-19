@@ -18,7 +18,6 @@ function* handleCartFetch() {
 
     yield put({ type: CART_FETCH_SUCCESS, payload: response.cartItems })
   } catch (err) {
-    console.log(err)
     yield put({ type: CART_FETCH_FAIL, payload: err })
   }
 }

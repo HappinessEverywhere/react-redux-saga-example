@@ -7,11 +7,12 @@ import {
   CART_FETCH,
   CART_FETCH_SUCCESS,
   CART_FETCH_FAIL,
+  ADD_CART,
   ADD_CART_SUCCESS,
   ADD_CART_FAIL,
+  REMOVE_CART,
   REMOVE_CART_SUCCESS,
   REMOVE_CART_FAIL,
-  ADD_CART,
 } from "../constants"
 
 const initialState = {
@@ -30,6 +31,7 @@ const LoadingReducer = produce((draft, action) => {
       break
     case CART_FETCH:
     case ADD_CART:
+    case REMOVE_CART:
       draft.cartLoading = true
       break
     case CART_FETCH:

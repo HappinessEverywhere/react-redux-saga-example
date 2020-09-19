@@ -16,10 +16,18 @@ const useStyles = makeStyles({
   },
 })
 
-function ProductCard({ product, cartItems, addCartItem }) {
+function ProductCard({ product, cartItems, loadingCartItemId, addCartItem }) {
   const classes = useStyles()
 
   const inCart = cartItems.findIndex((item) => item.id === product.id) >= 0
+
+  const isItemLoading = loadingCartItemId === product.id
+
+  let buttonText = isItemLoading
+    ? "Loading"
+    : inCart
+    ? "In Cart"
+    : "Add to cart"
 
   return (
     <Card className={classes.root}>
@@ -40,7 +48,7 @@ function ProductCard({ product, cartItems, addCartItem }) {
           onClick={() => addCartItem(product)}
           disabled={inCart}
         >
-          {inCart ? "In Cart" : "Add to cart"}
+          {buttonText}
         </Button>
       </CardActions>
     </Card>
@@ -48,7 +56,8 @@ function ProductCard({ product, cartItems, addCartItem }) {
 }
 
 const mapStateToProps = ({ cart }) => ({
-  cartItems: cart,
+  cartItems: cart.cartItems,
+  loadingCartItemId: cart.loadingCartItemId,
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

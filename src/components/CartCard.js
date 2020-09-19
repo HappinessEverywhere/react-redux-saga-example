@@ -31,7 +31,7 @@ function CartCard({ cartItem, removeCartItem }) {
         <Button
           size="small"
           color="primary"
-          onClick={() => removeCartItem(cartItem.id)}
+          onClick={() => removeCartItem(cartItem)}
         >
           Remove
         </Button>
@@ -41,8 +41,8 @@ function CartCard({ cartItem, removeCartItem }) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  removeCartItem: (cartItemId) =>
-    dispatch({ type: "REMOVE_CART", payload: cartItemId }),
+  removeCartItem: (cartItem) =>
+    dispatch({ type: "REMOVE_CART", payload: cartItem }),
 })
 
 export default connect(null, mapDispatchToProps)(CartCard)

@@ -11,7 +11,7 @@ function Cart() {
   // State
   const { cartLoading, cartItems, cartError } = useSelector((state) => ({
     cartLoading: state.isLoading.cartLoading,
-    cartItems: state.cart,
+    cartItems: state.cart.cartItems,
     cartError: state.error.cartError,
   }))
 
