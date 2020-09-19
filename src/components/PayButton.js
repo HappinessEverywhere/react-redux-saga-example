@@ -1,10 +1,14 @@
 import React from "react"
-import { connect } from "react-redux"
+import { useSelector } from "react-redux"
 import Button from "@material-ui/core/Button"
 
 import { centsToDollar } from "../util"
 
-function PayButton({ cartItems }) {
+function PayButton() {
+  const { cartItems } = useSelector((state) => ({
+    cartItems: state.cart,
+  }))
+
   const amountToPay = cartItems.reduce((total, item) => total + item.price, 0)
   return (
     <Button fullWidth size="large" variant="contained" color="primary">
@@ -13,8 +17,4 @@ function PayButton({ cartItems }) {
   )
 }
 
-const mapStateToProps = ({ cart }) => ({
-  cartItems: cart,
-})
-
-export default connect(mapStateToProps)(PayButton)
+export default PayButton

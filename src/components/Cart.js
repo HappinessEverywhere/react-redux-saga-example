@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { connect } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import Grid from "@material-ui/core/Grid"
 import Typography from "@material-ui/core/Typography"
 import CartCard from "./CartCard"
@@ -7,10 +7,25 @@ import PayButton from "./PayButton"
 import Loader from "./Loader"
 import Alert from "./Alert"
 
-function Cart({ cartItems = [], cartLoading, fetchCart, cartError }) {
+function Cart() {
+  // State
+  const { cartLoading, cartItems, cartError } = useSelector((state) => ({
+    cartLoading: state.isLoading.cartLoading,
+    cartItems: state.cart,
+    cartError: state.error.cartError,
+  }))
+
+  // Dispatch
+  const dispatch = useDispatch()
+  const { fetchCart } = {
+    fetchCart: () => dispatch({ type: "CART_FETCH" }),
+  }
+
+  // Life cycle methods
   useEffect(() => {
     fetchCart()
   }, [])
+
   return (
     <Grid container>
       {cartLoading && <Loader />}
@@ -34,18 +49,4 @@ function Cart({ cartItems = [], cartLoading, fetchCart, cartError }) {
   )
 }
 
-const mapStateToProps = ({
-  cart,
-  isLoading: { cartLoading },
-  error: { cartError },
-}) => ({
-  cartItems: cart,
-  cartLoading,
-  cartError,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  fetchCart: () => dispatch({ type: "CART_FETCH" }),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+export default Cart
