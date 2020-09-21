@@ -15,17 +15,17 @@ const useStyles = makeStyles({
   },
 })
 
-export default function ProductCard({ title, price }) {
+export default function ProductCard({ product }) {
   const classes = useStyles()
 
   return (
     <Card className={classes.root}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
-          {title}
+          {product.title}
         </Typography>
         <Typography gutterBottom variant="subtitle1">
-          {centsToDollar(price)}
+          {centsToDollar(product.price)}
         </Typography>
       </CardContent>
 

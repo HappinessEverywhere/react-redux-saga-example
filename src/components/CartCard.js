@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography"
 
 import { centsToDollar } from "../util"
 
-export default function ProductCard({ title, price }) {
+export default function ProductCard({ cartItem }) {
   return (
     <Grid
       container
@@ -18,11 +18,11 @@ export default function ProductCard({ title, price }) {
     >
       <Grid item xs={9}>
         <Typography variant="h5" component="p">
-          {title}
+          {cartItem.title}
         </Typography>
 
         <Typography variant="subtitle1" component="p">
-          {centsToDollar(price)}
+          {centsToDollar(cartItem.price)}
         </Typography>
       </Grid>
 

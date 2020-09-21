@@ -7,7 +7,7 @@ function Products({ products = [] }) {
     <Grid container>
       {products.map((product) => (
         <Grid item xs={3} key={product.id}>
-          <ProductCard title={product.title} price={product.price} />
+          <ProductCard product={product} />
         </Grid>
       ))}
     </Grid>

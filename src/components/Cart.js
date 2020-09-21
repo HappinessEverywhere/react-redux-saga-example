@@ -18,11 +18,7 @@ function Cart({ cartItems = [] }) {
 
       {cartItems.map((cartItem) => (
         <Grid item xs={12}>
-          <CartCard
-            title={cartItem.title}
-            price={cartItem.price}
-            key={cartItem.id}
-          />
+          <CartCard cartItem={cartItem} key={cartItem.id} />
         </Grid>
       ))}
       <PayButton amountToPay={0} />
