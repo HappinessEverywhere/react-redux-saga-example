@@ -1,5 +1,5 @@
 import React from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { makeStyles } from "@material-ui/core/styles"
 import Card from "@material-ui/core/Card"
 import CardActions from "@material-ui/core/CardActions"
@@ -20,7 +20,13 @@ const useStyles = makeStyles({
 
 export default function ProductCard({ product }) {
   const classes = useStyles()
+
+  const { cartItems } = useSelector((state) => ({
+    cartItems: state.cart.cartItems,
+  }))
   const dispatch = useDispatch()
+
+  const inCart = cartItems.findIndex((item) => item.id === product.id) >= 0
 
   return (
     <Card className={classes.root}>
@@ -38,9 +44,10 @@ export default function ProductCard({ product }) {
           fullWidth
           size="small"
           color="primary"
+          disabled={inCart}
           onClick={() => dispatch({ type: ADD_CART, payload: product })}
         >
-          Add to cart
+          {inCart ? "In Cart" : "Add to cart"}
         </Button>
       </CardActions>
     </Card>

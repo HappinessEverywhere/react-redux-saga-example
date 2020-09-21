@@ -146,9 +146,9 @@ export const addCartItem = async () => {
 
 export const removeCartItem = async () => {
   await wait()
-  // return { success: true }
-  throw {
-    error:
-      "Some problems in removing items from the cart. Please try again later.",
-  }
+  return { success: true }
+  // throw {
+  //   error:
+  //     "Some problems in removing items from the cart. Please try again later.",
+  // }
 }
