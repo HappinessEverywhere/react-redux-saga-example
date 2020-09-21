@@ -1,3 +1,5 @@
+import { wait } from "../util"
+
 const products = [
   {
     id: 1,
@@ -106,6 +108,7 @@ const products = [
   },
 ]
 
-export const getProducts = () => {
+export const getProducts = async () => {
+  await wait()
   return products
 }

@@ -21,8 +21,8 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles()
   const [products, setProducts] = useState([])
-  useEffect(() => {
-    const results = getProducts()
+  useEffect(async () => {
+    const results = await getProducts()
     setProducts(results)
   }, [])
   return (
