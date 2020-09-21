@@ -7,7 +7,7 @@ import PrimaryAppBar from "./components/PrimaryAppBar"
 import Products from "./components/Products"
 import Cart from "./components/Cart"
 
-import { getProducts } from "./db"
+import { getProducts, getCartItems } from "./api"
 
 const useStyles = makeStyles({
   bgGrey: {
@@ -21,19 +21,22 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles()
   const [products, setProducts] = useState([])
+  const [cartItems, setCartItems] = useState([])
   useEffect(async () => {
-    const results = await getProducts()
-    setProducts(results.products)
+    const resultsProducts = await getProducts()
+    setProducts(resultsProducts.products)
+    const resultsCartItems = await getCartItems()
+    setCartItems(resultsCartItems.cartItems)
   }, [])
   return (
     <>
-      <PrimaryAppBar />
+      <PrimaryAppBar itemCount={cartItems.length} />
       <Grid container className={classes.bgGrey}>
         <Grid item xs={9} className={classes.p10}>
           <Products products={products} />
         </Grid>
         <Grid item xs={3} className={classes.p10}>
-          <Cart />
+          <Cart cartItems={cartItems} />
         </Grid>
       </Grid>
     </>

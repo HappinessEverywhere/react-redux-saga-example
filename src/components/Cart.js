@@ -21,7 +21,9 @@ function Cart({ cartItems = [] }) {
           <CartCard cartItem={cartItem} key={cartItem.id} />
         </Grid>
       ))}
-      <PayButton amountToPay={0} />
+      <PayButton
+        amountToPay={cartItems.reduce((total, item) => total + item.price, 0)}
+      />
     </Grid>
   )
 }

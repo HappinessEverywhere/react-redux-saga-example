@@ -7,7 +7,7 @@ import Badge from "@material-ui/core/Badge"
 import AccountCircle from "@material-ui/icons/AccountCircle"
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 
-export default function PrimaryAppBar({ itemCount = 12 }) {
+export default function PrimaryAppBar({ itemCount = 0 }) {
   return (
     <>
       <AppBar position="sticky" color="inherit">
