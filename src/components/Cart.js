@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography"
 import CartCard from "./CartCard"
 import PayButton from "./PayButton"
 import Loader from "./Loader"
-import Alert from "@material-ui/lab/Alert"
+import Alert from "./Alert"
 
 function Cart({ cartItems = [] }) {
   const { loading, error } = useSelector((state) => ({

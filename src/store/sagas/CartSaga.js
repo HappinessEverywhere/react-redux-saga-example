@@ -12,7 +12,7 @@ import {
   REMOVE_CART_FAIL,
 } from "../constants"
 
-import { getCartItems, addCartItem } from "../../api"
+import { getCartItems, addCartItem, removeCartItem } from "../../api"
 
 // Worker saga
 function* handleCartItemsFetch() {
@@ -34,7 +34,7 @@ function* handleAddCartItem({ payload }) {
 
 function* handleRemoveCartItem({ payload }) {
   try {
-    const response = yield call(addCartItem)
+    const response = yield call(removeCartItem)
     yield put({ type: REMOVE_CART_SUCCESS, payload: payload })
   } catch (err) {
     yield put({ type: REMOVE_CART_FAIL, payload: err })
