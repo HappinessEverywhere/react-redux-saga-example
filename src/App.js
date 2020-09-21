@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import Grid from "@material-ui/core/Grid"
 import { makeStyles } from "@material-ui/core/styles"
 import "./App.css"
@@ -7,6 +7,7 @@ import "./App.css"
 import PrimaryAppBar from "./components/PrimaryAppBar"
 import Products from "./components/Products"
 import Cart from "./components/Cart"
+import { PRODUCTS_FETCH, CART_ITEMS_FETCH } from "./store/constants"
 
 import { getProducts, getCartItems } from "./api"
 
@@ -20,23 +21,16 @@ const useStyles = makeStyles({
 })
 
 function App() {
-  const state = useSelector((state) => {
+  const classes = useStyles()
+
+  const { products, cartItems } = useSelector((state) => {
     return state
   })
 
-  console.log(state)
+  const dispatch = useDispatch()
+  dispatch({ type: PRODUCTS_FETCH })
+  dispatch({ type: CART_ITEMS_FETCH })
 
-  const classes = useStyles()
-  const [products, setProducts] = useState([])
-  const [cartItems, setCartItems] = useState([])
-  useEffect(() => {
-    ;(async () => {
-      const resultsProducts = await getProducts()
-      setProducts(resultsProducts.products)
-      const resultsCartItems = await getCartItems()
-      setCartItems(resultsCartItems.cartItems)
-    })()
-  }, [])
   return (
     <>
       <PrimaryAppBar itemCount={cartItems.length} />

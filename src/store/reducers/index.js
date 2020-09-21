@@ -1,5 +1,10 @@
-const initialState = { a: 1 }
+import { combineReducers } from "redux"
+import ProductReducer from "./ProductsReducer"
+import CartItemsReducer from "./CartItemsReducer"
 
-export default (state = initialState, actions) => {
-  return state
-}
+const rootReducer = combineReducers({
+  products: ProductReducer,
+  cartItems: CartItemsReducer,
+})
+
+export default rootReducer
