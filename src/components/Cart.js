@@ -17,7 +17,7 @@ function Cart({ cartItems = [] }) {
       </Typography>
 
       {cartItems.map((cartItem) => (
-        <Grid item xs={12}>
+        <Grid item xs={12} key={cartItem.id}>
           <CartCard cartItem={cartItem} key={cartItem.id} />
         </Grid>
       ))}

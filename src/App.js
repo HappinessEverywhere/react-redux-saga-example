@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
 import Grid from "@material-ui/core/Grid"
 import { makeStyles } from "@material-ui/core/styles"
 import "./App.css"
@@ -19,14 +20,22 @@ const useStyles = makeStyles({
 })
 
 function App() {
+  const state = useSelector((state) => {
+    return state
+  })
+
+  console.log(state)
+
   const classes = useStyles()
   const [products, setProducts] = useState([])
   const [cartItems, setCartItems] = useState([])
-  useEffect(async () => {
-    const resultsProducts = await getProducts()
-    setProducts(resultsProducts.products)
-    const resultsCartItems = await getCartItems()
-    setCartItems(resultsCartItems.cartItems)
+  useEffect(() => {
+    ;(async () => {
+      const resultsProducts = await getProducts()
+      setProducts(resultsProducts.products)
+      const resultsCartItems = await getCartItems()
+      setCartItems(resultsCartItems.cartItems)
+    })()
   }, [])
   return (
     <>
