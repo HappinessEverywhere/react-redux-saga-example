@@ -23,7 +23,7 @@ function App() {
   const [products, setProducts] = useState([])
   useEffect(async () => {
     const results = await getProducts()
-    setProducts(results)
+    setProducts(results.products)
   }, [])
   return (
     <>

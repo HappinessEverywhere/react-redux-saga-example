@@ -108,7 +108,47 @@ const products = [
   },
 ]
 
+const cartItems = [
+  {
+    id: 2,
+    title: "Bread",
+    price: 250,
+  },
+  {
+    id: 3,
+    title: "Salad Dressings",
+    price: 780,
+  },
+]
+
 export const getProducts = async () => {
   await wait()
-  return products
+  return { success: true, products }
+  // throw {
+  //   error: "Some problems in fetching the products. Please try again later.",
+  // }
+}
+export const getCartItems = async () => {
+  await wait()
+  return { success: true, cartItems }
+  // throw {
+  //   error: "Some problems in fetching the cart items. Please try again later.",
+  // }
+}
+
+export const addCartItem = async () => {
+  await wait()
+  return { success: true }
+  // throw {
+  //   error: "Some problems in adding items to the cart. Please try again later.",
+  // }
+}
+
+export const removeCartItem = async () => {
+  await wait()
+  return { success: true }
+  // throw {
+  //   error:
+  //     "Some problems in removing items from the cart. Please try again later.",
+  // }
 }
