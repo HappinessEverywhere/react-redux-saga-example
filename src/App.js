@@ -23,13 +23,18 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles()
 
-  const { products, cartItems } = useSelector((state) => {
+  const {
+    product: { products },
+    cart: { cartItems },
+  } = useSelector((state) => {
     return state
   })
 
   const dispatch = useDispatch()
-  dispatch({ type: PRODUCTS_FETCH })
-  dispatch({ type: CART_ITEMS_FETCH })
+  useEffect(() => {
+    dispatch({ type: PRODUCTS_FETCH })
+    dispatch({ type: CART_ITEMS_FETCH })
+  }, [])
 
   return (
     <>

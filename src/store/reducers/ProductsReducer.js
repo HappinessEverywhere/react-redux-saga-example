@@ -1,9 +1,13 @@
 import { PRODUCTS_FETCH_SUCCESS } from "../constants"
 
-export default (state = [], action) => {
+const initialState = {
+  products: [],
+}
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case PRODUCTS_FETCH_SUCCESS:
-      return action.payload
+      return { ...state, products: action.payload }
 
     default:
       return state

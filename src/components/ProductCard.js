@@ -1,8 +1,11 @@
 import React from "react"
+import { useDispatch } from "react-redux"
 import { makeStyles } from "@material-ui/core/styles"
 import Card from "@material-ui/core/Card"
 import CardActions from "@material-ui/core/CardActions"
 import CardContent from "@material-ui/core/CardContent"
+
+import { ADD_CART } from "../store/constants"
 
 import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography"
@@ -17,6 +20,7 @@ const useStyles = makeStyles({
 
 export default function ProductCard({ product }) {
   const classes = useStyles()
+  const dispatch = useDispatch()
 
   return (
     <Card className={classes.root}>
@@ -30,7 +34,12 @@ export default function ProductCard({ product }) {
       </CardContent>
 
       <CardActions>
-        <Button fullWidth size="small" color="primary">
+        <Button
+          fullWidth
+          size="small"
+          color="primary"
+          onClick={() => dispatch({ type: ADD_CART, payload: product })}
+        >
           Add to cart
         </Button>
       </CardActions>

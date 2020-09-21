@@ -1,11 +1,14 @@
 import React from "react"
+import { useDispatch } from "react-redux"
 import Grid from "@material-ui/core/Grid"
 import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography"
+import { REMOVE_CART } from "../store/constants"
 
 import { centsToDollar } from "../util"
 
 export default function ProductCard({ cartItem }) {
+  const dispatch = useDispatch()
   return (
     <Grid
       container
@@ -27,7 +30,11 @@ export default function ProductCard({ cartItem }) {
       </Grid>
 
       <Grid container item xs={3} justify="flex-end">
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => dispatch({ type: REMOVE_CART, payload: cartItem })}
+        >
           Remove
         </Button>
       </Grid>
