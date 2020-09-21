@@ -1,12 +1,22 @@
 import React from "react"
+import { useSelector } from "react-redux"
 import Grid from "@material-ui/core/Grid"
 import Typography from "@material-ui/core/Typography"
 import CartCard from "./CartCard"
 import PayButton from "./PayButton"
+import Loader from "./Loader"
+import Alert from "@material-ui/lab/Alert"
 
 function Cart({ cartItems = [] }) {
+  const { loading, error } = useSelector((state) => ({
+    loading: state.loadingStatus.cartLoading,
+    error: state.error.cartError,
+  }))
+
   return (
     <Grid container>
+      {loading && <Loader />}
+      {error && <Alert />}
       <Typography
         align="center"
         gutterBottom
